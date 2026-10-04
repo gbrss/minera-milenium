@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro';
+import { pillars } from '../data/site';
+---
+<section class="section" id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <img src="/img/equipo-casco.jpg" alt="Profesional de Minera Milenium en faena minera" loading="lazy" width="650" height="1100" />
+      </div>
+      <div class="about-text reveal">
+        <span class="eyebrow">Nosotros</span>
+        <h2>Nueva minería, <span class="gold">nuevo futuro</span> para nuestras comunidades</h2>
+        <blockquote class="about-quote">
+          En Comercializadora Minera Milenium impulsamos la <strong>nueva minería</strong> mediante el
+          desarrollo de ingeniería, el control estricto de gastos y la optimización de operaciones y
+          mantenimiento; un camino estratégico para crecer junto a las comunidades, generar empleos
+          locales y consolidar una <strong>minería sustentable</strong> basada en energías limpias.
+        </blockquote>
+        <p style="margin-top:1.4rem;color:var(--muted)">
+          Fortalecemos el empleo y la productividad en la micro, pequeña y mediana minería, con
+          contratos justos y transparentes a largo plazo.
+        </p>
+      </div>
+    </div>
+
+    <ul class="pillars reveal">
+      {pillars.map((p) => (
+        <li class="pillar">
+          <Icon name={p.icon} size={46} />
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+<div class="banner">Minerales de calidad <span>|</span> Procesos responsables <span>|</span> Futuro sustentable</div>

@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<section class="section alt" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow">Contacto</span>
+        <h2>¡Seamos <span class="gold">socios estratégicos</span>!</h2>
+        <p>
+          Contáctanos y sé parte de esta gran alianza de crecimiento mutuo. Cuéntanos qué mineral
+          produces y en qué zona trabajas, y te responderemos a la brevedad.
+        </p>
+        <ul class="contact-list">
+          <li><Icon name="mail" size={30} /><div><small>Consultas</small><a href={`mailto:${site.emailMain}`}>{site.emailMain}</a></div></li>
+          <li><Icon name="mail" size={30} /><div><small>Corporativo</small><a href={`mailto:${site.emailCorp}`}>{site.emailCorp}</a></div></li>
+          <li><Icon name="globe" size={30} /><div><small>Web</small><a href={site.url}>{site.web}</a></div></li>
+          <li><Icon name="pin" size={30} /><div><small>Zonas de compra</small>Vallenar, Copiapó (Atacama) · Huara, Iquique (Tarapacá)</div></li>
+        </ul>
+      </div>
+
+      <form class="form reveal" data-contact-form>
+        <div class="row">
+          <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" required autocomplete="name" /></div>
+          <div class="field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" autocomplete="tel" /></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="empresa">Empresa / faena</label><input id="empresa" name="empresa" autocomplete="organization" /></div>
+          <div class="field">
+            <label for="interes">Me interesa</label>
+            <select id="interes" name="interes" required>
+              <option>Vender hierro al 62%</option>
+              <option>Vender sulfuro de cobre</option>
+              <option>Vender / comprar sal industrial</option>
+              <option>Alianza comercial</option>
+              <option>Otra consulta</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" required></textarea></div>
+        <button class="btn btn-gold" type="submit">Enviar consulta <Icon name="arrow" size={18} /></button>
+        <p class="note">Al enviar se abrirá tu aplicación de correo con el mensaje listo para {site.emailMain}.</p>
+      </form>
+    </div>
+  </div>
+</section>

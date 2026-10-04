@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props { title?: string; description?: string }
+const {
+  title = 'Minera Milenium | Comercializadora de minerales para exportación',
+  description = 'Comercializadora Minera Milenium: poder de compra de hierro al 62%, sulfuro de cobre y sal industrial en Atacama y Tarapacá. Compra directa y transparente a la pequeña y mediana minería.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#07112b" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/img/logo.png', site.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: site.legal,
+      url: site.url,
+      logo: new URL('/img/logo.png', site.url).href,
+      email: site.emailCorp,
+      areaServed: 'CL',
+    })} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Menú móvil
+      const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+      const nav = document.querySelector<HTMLElement>('[data-nav]');
+      toggle?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(!!open));
+      });
+      nav?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          nav.classList.remove('open');
+          toggle?.setAttribute('aria-expanded', 'false');
+        })
+      );
+
+      // Header con sombra al hacer scroll
+      const header = document.querySelector('.site-header');
+      const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 24);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Animación de entrada
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('in'));
+      }
+
+      // Formulario → correo
+      const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+      form?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const f = new FormData(form);
+        const subject = `Consulta web - ${f.get('interes') || 'General'}`;
+        const body = [
+          `Nombre: ${f.get('nombre')}`,
+          `Empresa / faena: ${f.get('empresa') || '-'}`,
+          `Teléfono: ${f.get('telefono') || '-'}`,
+          `Interés: ${f.get('interes')}`,
+          '',
+          `${f.get('mensaje')}`,
+        ].join('\n');
+        window.location.href = `mailto:minera.milenium@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { impact } from '../data/site';
+---
+<section class="section quote">
+  <div class="container">
+    <div class="quote-grid">
+      <div class="quote-photo reveal">
+        <img src="/img/fundador-tarapaca.jpg" alt="Minera Milenium en terreno, Tarapacá" loading="lazy" width="980" height="1080" />
+      </div>
+      <div class="reveal">
+        <blockquote>
+          Desde <span class="gold">Tarapacá, Chile</span> con el esfuerzo de la pequeña minería <span class="gold">al mundo</span>”
+        </blockquote>
+        <p class="sub">Pequeña minería, gran impacto global</p>
+        <ul class="impact">
+          {impact.map((i) => (
+            <li><Icon name={i.icon} size={34} /><div><strong>{i.title}</strong>{i.text}</div></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import Icon from './Icon.astro';
+import { plants, exwork } from '../data/site';
+---
+<section class="section" id="plantas">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nuestras plantas</span>
+      <h2>Planta <em>Andrea</em>: poder de compra en faena</h2>
+      <p>Comprometidos con la pequeña minería, con seriedad, transparencia y confianza.</p>
+    </div>
+
+    <div class="plants">
+      {plants.map((p) => (
+        <article class="plant reveal">
+          <div class="plant-head">
+            <Icon name="pin" size={34} />
+            <h3>{p.name}<small>{p.place}</small></h3>
+          </div>
+          <div class="plant-tag">Poder de compra</div>
+          <img src={p.image} alt={`${p.name} - ${p.product}`} loading="lazy" />
+          <div class="plant-body">
+            <span class="product">{p.product}</span>
+            <h4>{p.lead}</h4>
+            <p>{p.text}</p>
+            <ul class="checks">
+              {p.points.map((pt) => (
+                <li><Icon name="check" size={18} /><span>{pt}</span></li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="exwork reveal">
+      <div class="exwork-media">
+        <figure><img src="/img/hierro.jpg" alt="Mineral de hierro al 62%" loading="lazy" /><figcaption>Hierro al 62%<br />Compra Exwork</figcaption></figure>
+        <figure><img src="/img/cobre.jpg" alt="Sulfuro de cobre" loading="lazy" /><figcaption>Sulfuro de cobre<br />Compra Exwork</figcaption></figure>
+      </div>
+      <div class="exwork-body">
+        <h3>Poder de compra <span class="gold">Planta Andrea Atacama</span></h3>
+        {exwork.map((e) => (
+          <div class="exwork-item"><h4>{e.title} · Compra Exwork</h4><p>{e.text}</p></div>
+        ))}
+        <p style="color:var(--muted);font-size:.95rem">Trabajamos junto a quienes mueven la minería de Chile.</p>
+      </div>
+    </div>
+  </div>
+</section>

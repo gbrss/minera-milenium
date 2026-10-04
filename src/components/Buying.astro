@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import { regions, communes, exworkBenefits } from '../data/site';
+---
+<section class="section alt" id="poder-de-compra">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Poderes de compra activos</span>
+      <h2>Compramos <em>hierro y sal industrial</em> en el norte de Chile</h2>
+      <p>
+        Es un orgullo informar la puesta en marcha y consolidación de nuestro poder de compra en
+        Atacama y Tarapacá, con un canal directo, transparente y eficiente para la adquisición de
+        sus productos.
+      </p>
+    </div>
+
+    <div class="regions">
+      {regions.map((r) => (
+        <article class={`region-card reveal ${r.region.toLowerCase()}`}>
+          <div class="region-media"><img src={r.image} alt={`${r.product} ${r.detail} - ${r.region}`} loading="lazy" /></div>
+          <div class="region-body">
+            <div class="label">{r.region}</div>
+            <h3 class="gold">{r.product}</h3>
+            <div class="detail">{r.detail}</div>
+            <ul class="benefits">
+              {r.benefits.map((b) => (
+                <li><Icon name={b.icon} size={26} /><span>{b.text}</span></li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="communes">
+      {communes.map((c) => (
+        <div class="commune-card reveal">
+          <h4>{c.region}</h4>
+          <ul class="commune-list">
+            {c.places.map((p) => (
+              <li>
+                <Icon name="pin" size={24} />
+                <div>
+                  {p.name}
+                  {p.sub && <ul>{p.sub.map((s) => <li>{s}</li>)}</ul>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="promise reveal">
+      <p>
+        <strong>Contratos a largo plazo con pequeños mineros.</strong> Condiciones comerciales
+        competitivas y un trato justo para todos los productores locales.
+      </p>
+      <div class="icon-row">
+        {exworkBenefits.map((b) => (
+          <div><Icon name={b.icon} size={44} /><span>{b.text}</span></div>
+        ))}
+        <div><Icon name="people" size={44} /><span>Generamos empleos</span></div>
+        <div><Icon name="recycle" size={44} /><span>Impulsamos la economía circular</span></div>
+        <div><Icon name="chart" size={44} /><span>Desarrollamos comunidades</span></div>
+      </div>
+    </div>
+  </div>
+</section>

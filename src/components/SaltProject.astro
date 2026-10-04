@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+import { saltStats, jobs, markets, values, commitments } from '../data/site';
+---
+<section class="section salt" id="proyecto-sal">
+  <div class="container">
+    <div class="salt-hero">
+      <div class="reveal">
+        <span class="eyebrow">Minera Milenium SpA</span>
+        <h2>Proyecto de producción y exportación de <span class="gold">sal industrial</span></h2>
+        <p>Desarrollo minero, logístico, industrial y regional para Tarapacá.</p>
+        <div class="chips">
+          <span class="chip"><Icon name="leaf" size={18} /> Sostenible</span>
+          <span class="chip"><Icon name="bulb" size={18} /> Innovador</span>
+          <span class="chip"><Icon name="shield" size={18} /> Seguro</span>
+          <span class="chip"><Icon name="handshake" size={18} /> Confiable</span>
+        </div>
+      </div>
+      <div class="photo reveal">
+        <img src="/img/hero-sal.jpg" alt="Acopio de sal industrial en Tarapacá" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      {saltStats.map((s) => (
+        <div class="stat">
+          <div class="label">{s.label}</div>
+          <div class="value gold">{s.value}</div>
+          <div class="unit">{s.unit}</div>
+        </div>
+      ))}
+    </div>
+
+    <div class="salt-grid">
+      <div class="panel reveal">
+        <h3>Empleo para la región</h3>
+        {jobs.map((j) => (
+          <div class="job">
+            <div class="label">{j.label}</div>
+            <div class="value gold">{j.value} <small>{j.unit}</small></div>
+          </div>
+        ))}
+        <div class="where"><Icon name="pin" size={22} /> Tarapacá, Chile</div>
+      </div>
+      <div class="panel reveal">
+        <h3>Mercados internacionales</h3>
+        <div class="markets">
+          {markets.map((m) => (
+            <div class="market"><span aria-hidden="true">{m.flag}</span><span>{m.name}</span></div>
+          ))}
+        </div>
+        <p class="markets-note">Desde Tarapacá, Chile con el esfuerzo de la pequeña minería al Mundo.</p>
+      </div>
+    </div>
+
+    <div class="values reveal">
+      {values.map((v) => (
+        <div class="value-card">
+          <Icon name={v.icon} size={34} />
+          <h4>{v.title}</h4>
+          <p>{v.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="icon-row reveal" style="margin-top:2.4rem">
+      {commitments.map((c) => (
+        <div><Icon name={c.icon} size={40} /><span><span class="gold">{c.title}</span> {c.text}</span></div>
+      ))}
+    </div>
+  </div>
+</section>

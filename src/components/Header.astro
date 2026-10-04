@@ -1,0 +1,15 @@
+---
+import { nav } from '../data/site';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label="Minera Milenium - Inicio">
+      <img src="/img/logo-sm.png" alt="Logo Minera Milenium" width="256" height="137" />
+    </a>
+    <button class="menu-toggle" data-menu-toggle aria-label="Abrir menú" aria-expanded="false"><span></span></button>
+    <nav class="nav" data-nav aria-label="Principal">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a class="btn btn-gold" href="#contacto">Vende tu mineral</a>
+    </nav>
+  </div>
+</header>
